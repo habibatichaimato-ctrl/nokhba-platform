@@ -1,0 +1,7 @@
+{
+  "name": "Nexus Platform",
+  "description": "منصة نيكسوس الشاملة والمتكاملة - بوابة الخدمات، المتجر الإلكتروني، المدونة، والتوظيف بتصميم عصري ومتجاوب بالكامل باللغة العربية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
