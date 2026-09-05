@@ -20,10 +20,10 @@ import {
 import { BlogPost, BlogComment } from '../../types';
 
 // دالة بسيطة لتفسير الروابط والنصوص العريضة داخل سطر واحد
-// تدعم صيغة [نص](رابط) وصيغة **نص عريض**
+// تدعم الروابط المباشرة، وصيغة [نص](رابط)، وصيغة **نص عريض**
 const renderInline = (text: string, keyPrefix: string) => {
   const parts: React.ReactNode[] = [];
-  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|(https?:\/\/[^\s<]+)|\*\*([^*]+)\*\*/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   let idx = 0;
@@ -46,8 +46,27 @@ const renderInline = (text: string, keyPrefix: string) => {
         </a>
       );
     } else if (match[3]) {
+      const trailingPunctuation = match[3].match(/[.,!?،؛؟:)]*$/)?.[0] || '';
+      const url = trailingPunctuation
+        ? match[3].slice(0, -trailingPunctuation.length)
+        : match[3];
+
+      parts.push(
+        <React.Fragment key={`${keyPrefix}-url-${idx++}`}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-400 underline decoration-amber-500/50 hover:text-amber-300 font-bold"
+          >
+            {url}
+          </a>
+          {trailingPunctuation}
+        </React.Fragment>
+      );
+    } else if (match[4]) {
       // نص عريض **نص**
-      parts.push(<strong key={`${keyPrefix}-bold-${idx++}`}>{match[3]}</strong>);
+      parts.push(<strong key={`${keyPrefix}-bold-${idx++}`}>{match[4]}</strong>);
     }
     lastIndex = pattern.lastIndex;
   }
@@ -481,7 +500,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
             </div>
 
             {/* Article Content Paragraphs */}
-            <div className="space-y-4 text-sm sm:text-base text-slate-200 leading-relaxed">
+            <div className="space-y-4 whitespace-pre-line text-sm sm:text-base text-slate-200 leading-relaxed">
               {activePostForModal.content.map((p, idx) => renderArticleParagraph(p, idx))}
             </div>
 
