@@ -74,7 +74,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="ابحث عن منتج، مقال، أو وظيفة في نيكسوس..."
+            placeholder="ابحث عن منتج، مقال، أو وظيفة في النخبة..."
             className="w-full bg-transparent text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none"
           />
           {query && (
@@ -101,7 +101,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">
-                البحث الموحد في منصة نيكسوس
+                البحث الموحد في منصة النخبة
               </h3>
               <p className="text-xs text-slate-500">
                 اكتب ما تبحث عنه للوصول السريع للمنتجات، المقالات، أو الوظائف الشاغرة.

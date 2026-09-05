@@ -107,14 +107,14 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
     e.preventDefault();
     setPromoError('');
     setPromoSuccess('');
-    if (promoCode.trim().toUpperCase() === 'NEXUS20') {
+    if (promoCode.trim().toUpperCase() === 'NOKHBA20') {
       setDiscountPercent(20);
       setPromoSuccess('تم تطبيق خصم 20% بنجاح!');
-    } else if (promoCode.trim().toUpperCase() === 'NEXUS10') {
+    } else if (promoCode.trim().toUpperCase() === 'NOKHBA10') {
       setDiscountPercent(10);
       setPromoSuccess('تم تطبيق خصم 10% بنجاح!');
     } else {
-      setPromoError('رمز القسيمة غير صالح. جرب كود NEXUS20');
+      setPromoError('رمز القسيمة غير صالح. جرب كود NOKHBA20');
     }
   };
 
@@ -149,7 +149,7 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-bold mb-3">
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>متجر Nexus للتقنيات الفائقة</span>
+            <span>متجر النخبة للتقنيات الفائقة</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
             عتاد تقني متطور لرواد الأعمال والمطورين
@@ -493,7 +493,7 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
                     type="text"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    placeholder="كود الخصم (مثال: NEXUS20)"
+                    placeholder="كود الخصم (مثال: NOKHBA20)"
                     className="flex-1 bg-slate-950 border border-slate-800 focus:border-amber-500 rounded-xl px-3 py-2 text-xs text-white uppercase placeholder:normal-case placeholder-slate-500 focus:outline-none"
                   />
                   <button
@@ -521,7 +521,7 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
                   )}
                   <div className="flex justify-between">
                     <span>الشحن والتوصيل:</span>
-                    <span className="font-bold text-emerald-400">مجاني (عرض Nexus)</span>
+                    <span className="font-bold text-emerald-400">مجاني (عرض النخبة)</span>
                   </div>
                   <div className="flex justify-between text-base font-black text-white pt-2 border-t border-slate-800">
                     <span>الإجمالي النهائي:</span>

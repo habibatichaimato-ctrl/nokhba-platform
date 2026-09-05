@@ -4,7 +4,7 @@ export const mockAdminUsers: AdminUser[] = [
   {
     id: 'u-1',
     name: 'سارة المنصوري',
-    email: 'admin@nexus.dev',
+    email: 'admin@nokhba.dev',
     role: 'super_admin',
     roleLabel: 'مدير عام المنظومة',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
@@ -15,7 +15,7 @@ export const mockAdminUsers: AdminUser[] = [
   {
     id: 'u-2',
     name: 'طارق الكندي',
-    email: 'tariq@nexus.dev',
+    email: 'tariq@nokhba.dev',
     role: 'editor',
     roleLabel: 'محرر ومسؤول محتوى',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
@@ -26,7 +26,7 @@ export const mockAdminUsers: AdminUser[] = [
   {
     id: 'u-3',
     name: 'فيصل الغامدي',
-    email: 'faisal@nexus.dev',
+    email: 'faisal@nokhba.dev',
     role: 'moderator',
     roleLabel: 'مسؤول المبيعات والمنتجات',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
@@ -37,7 +37,7 @@ export const mockAdminUsers: AdminUser[] = [
   {
     id: 'u-4',
     name: 'ريم العتيبي',
-    email: 'reem@nexus.dev',
+    email: 'reem@nokhba.dev',
     role: 'support',
     roleLabel: 'مسؤولة التوظيف والدعم',
     avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80',
@@ -51,7 +51,7 @@ export const mockAdminNotifications: AdminNotification[] = [
   {
     id: 'notif-1',
     title: 'طلب شراء جديد',
-    message: 'تم إتمام عملية شراء بقيمة 4,899 د.م (محطة عمل Nexus Pro).',
+    message: 'تم إتمام عملية شراء بقيمة 4,899 د.م (محطة عمل النخبة Pro).',
     time: 'منذ 10 دقائق',
     read: false,
     type: 'order'
@@ -87,7 +87,7 @@ export const mockActivityLogs: AdminActivityLog[] = [
     id: 'act-1',
     adminName: 'سارة المنصوري',
     action: 'تحديث مواصفات المنتج',
-    target: 'Nexus AI Neural Core',
+    target: 'Nokhba AI Neural Core',
     timestamp: 'منذ 15 دقيقة',
     category: 'product'
   },

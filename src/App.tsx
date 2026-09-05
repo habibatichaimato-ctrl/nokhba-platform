@@ -68,8 +68,8 @@ export default function App() {
 
   // إعدادات المنصة الحقيقية (اسم المنصة، البريد، العملة، الضريبة، وضع الصيانة)
   const [platformSettings, setPlatformSettings] = useState({
-    platformName: 'Nexus Platform',
-    supportEmail: 'contact@nexus.dev',
+    platformName: 'Nokhba Platform',
+    supportEmail: 'contact@nokhba.dev',
     currency: 'MAD',
     vatRate: 15,
     maintenanceMode: false
@@ -737,7 +737,7 @@ export default function App() {
         addToast('error', 'فشلت إضافة المنتج', 'لم يتم حفظ المنتج في قاعدة البيانات، يرجى المحاولة مرة أخرى.');
         return;
       }
-      addToast('success', 'تمت إضافة المنتج', `تم نشر "${newProduct.name}" بنجاح في متجر Nexus.`);
+      addToast('success', 'تمت إضافة المنتج', `تم نشر "${newProduct.name}" بنجاح في متجر النخبة.`);
     });
   };
 
@@ -930,7 +930,7 @@ export default function App() {
         </div>
         <h1 className="text-2xl font-extrabold font-['Alexandria']">الموقع تحت الصيانة حالياً</h1>
         <p className="text-slate-400 max-w-md text-sm">
-          نعمل حالياً على تحسين منصة نيكسوس. سنعود قريباً جداً، شكراً لصبركم.
+          نعمل حالياً على تحسين منصة النخبة. سنعود قريباً جداً، شكراً لصبركم.
         </p>
         <button
           onClick={() => setActiveSection('admin')}

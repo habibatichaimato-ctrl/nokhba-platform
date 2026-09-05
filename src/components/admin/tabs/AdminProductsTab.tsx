@@ -480,7 +480,7 @@ export const AdminProductsTab: React.FC<AdminProductsTabProps> = ({
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="مثال: محطة عمل Nexus Pro Studio"
+                    placeholder="مثال: محطة عمل النخبة Pro Studio"
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
@@ -491,7 +491,7 @@ export const AdminProductsTab: React.FC<AdminProductsTabProps> = ({
                     type="text"
                     value={formData.nameEn}
                     onChange={(e) => setFormData({ ...formData, nameEn: e.target.value })}
-                    placeholder="Nexus Pro Studio Workstation"
+                    placeholder="Nokhba Pro Studio Workstation"
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-amber-500 text-left"
                     dir="ltr"
                   />

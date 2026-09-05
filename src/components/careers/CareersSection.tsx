@@ -122,7 +122,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold mb-3">
             <Briefcase className="w-3.5 h-3.5" />
-            <span>انضم لفريق Nexus للابتكار</span>
+            <span>انضم لفريق النخبة للابتكار</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
             ابنِ مستقبلك المهني مع رواد التكنولوجيا
@@ -295,7 +295,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({
                   <p><span className="text-slate-400">المتقدم:</span> {fullName}</p>
                   <p><span className="text-slate-400">البريد الإلكتروني:</span> {email}</p>
                   <p className="text-emerald-400 pt-2 border-t border-slate-800">
-                    سيقوم فريق الموارد البشرية في Nexus بمراجعة ملفك والتواصل معك خلال 48 ساعة.
+                    سيقوم فريق الموارد البشرية في النخبة بمراجعة ملفك والتواصل معك خلال 48 ساعة.
                   </p>
                 </div>
                 <button
@@ -465,7 +465,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">نبذة عن شغفك ولماذا Nexus؟</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">نبذة عن شغفك ولماذا النخبة؟</label>
                     <textarea
                       rows={3}
                       value={coverLetter}

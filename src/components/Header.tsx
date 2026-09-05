@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>مرحباً بك في منصة Nexus الرقمية المتكاملة</span>
+              <span>مرحباً بك في منصة النخبة الرقمية المتكاملة</span>
             </span>
             <span className="hidden md:inline-flex items-center gap-1 text-slate-400">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span>الدعم الفني</span>
             </a>
             <span className="text-slate-700">|</span>
-            <span className="text-amber-400 font-bold">كود الخصم: NEXUS20</span>
+            <span className="text-amber-400 font-bold">كود الخصم: NOKHBA20</span>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-3 text-right group focus:outline-none"
           >
             <div className="text-2xl sm:text-3xl font-black tracking-tighter text-amber-500 font-['Alexandria'] flex items-center gap-1">
-              <span>NEXUS</span>
+              <span>النخبة</span>
               <span className="text-white text-lg sm:text-xl font-normal">PLATFORM</span>
             </div>
           </button>

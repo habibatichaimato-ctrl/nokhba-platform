@@ -113,7 +113,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold mb-3">
             <Layers className="w-3.5 h-3.5" />
-            <span>خدمات وحلول Nexus الهندسية</span>
+            <span>خدمات وحلول النخبة الهندسية</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
             حلول برمجية وذكاء اصطناعي مخصصة لنمو مؤسستك
@@ -250,7 +250,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <p><span className="text-slate-400">صاحب الطلب:</span> {clientName} {companyName ? `(${companyName})` : ''}</p>
                   <p><span className="text-slate-400">الميزانية المقدرة:</span> <span className="text-amber-400 font-bold">{budgetRange}</span></p>
                   <p className="text-blue-400 pt-2 border-t border-slate-800">
-                    سيقوم مهندس الحلول في Nexus بمراجعة متطلبات المشروع وإعداد عرض فني ومالي مفصل خلال 24 ساعة عمل.
+                    سيقوم مهندس الحلول في النخبة بمراجعة متطلبات المشروع وإعداد عرض فني ومالي مفصل خلال 24 ساعة عمل.
                   </p>
                 </div>
                 <button

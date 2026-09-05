@@ -51,7 +51,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSubscribeNewslette
                 ابقَ على اطلاع دائم بأحدث التقنيات والفرص
               </h3>
               <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl">
-                اشترك في نشرة Nexus الأسبوعية لتصلك مقالات تقنية حصرية، عروض المتجر الخاصة، وفرص العمل الاستثنائية فور طرحها.
+                اشترك في نشرة النخبة الأسبوعية لتصلك مقالات تقنية حصرية، عروض المتجر الخاصة، وفرص العمل الاستثنائية فور طرحها.
               </p>
             </div>
 
@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSubscribeNewslette
               {isSubscribed ? (
                 <div className="flex items-center gap-3 p-4 bg-emerald-500/20 border border-emerald-500/30 rounded-2xl text-emerald-300 text-xs sm:text-sm font-semibold">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <span>شكراً لاشتراكك! تم تسجيل بريدك الإلكتروني بنجاح في نشرة نيكسوس.</span>
+                  <span>شكراً لاشتراكك! تم تسجيل بريدك الإلكتروني بنجاح في نشرة النخبة.</span>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
@@ -94,12 +94,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSubscribeNewslette
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-2xl font-black text-amber-600 font-['Alexandria'] flex items-center gap-1">
-              <span>NEXUS</span>
+              <span>النخبة</span>
               <span className="text-slate-900 font-bold">PLATFORM</span>
             </div>
 
             <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-sm">
-              منصة نيكسوس تجمع بين التسوق الإلكتروني التقني المتطور، المقالات التخصصية، الحلول الهندسية المخصصة، وأكبر شبكة لفرص العمل التقنية في الشرق الأوسط.
+              منصة النخبة تجمع بين التسوق الإلكتروني التقني المتطور، المقالات التخصصية، الحلول الهندسية المخصصة، وأكبر شبكة لفرص العمل التقنية في الشرق الأوسط.
             </p>
 
             <div className="space-y-1.5 pt-2 text-xs text-slate-500">
@@ -220,7 +220,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSubscribeNewslette
         <div className="pt-6 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <Globe className="w-3.5 h-3.5 text-slate-400" />
-            <span>© {new Date().getFullYear()} منصة نيكسوس الرقمية (Nexus Platform). جميع الحقوق محفوظة.</span>
+            <span>© {new Date().getFullYear()} منصة النخبة الرقمية. جميع الحقوق محفوظة.</span>
           </div>
 
           {/* Legal links */}

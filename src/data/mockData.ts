@@ -3,8 +3,8 @@ import { Product, BlogPost, JobListing, ServiceItem } from '../types';
 export const mockProducts: Product[] = [
   {
     id: 'prod-1',
-    name: 'محطة العمل الذكية Nexus Studio Pro',
-    nameEn: 'Nexus Studio Pro Hub',
+    name: 'محطة العمل الذكية النخبة Studio Pro',
+    nameEn: 'Nokhba Studio Pro Hub',
     description: 'محطة إرساء وتوصيل متعددة المنافذ بقدرة 100W مع دعم شاشات 4K المزدوجة ونقل بيانات فائق السرعة بسرعة 40Gbps.',
     price: 499,
     originalPrice: 650,
@@ -26,8 +26,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-2',
-    name: 'لوحة مفاتيح ميكانيكية لاسلكية Nexus Apex',
-    nameEn: 'Nexus Apex Mechanical Keyboard',
+    name: 'لوحة مفاتيح ميكانيكية لاسلكية النخبة Apex',
+    nameEn: 'Nokhba Apex Mechanical Keyboard',
     description: 'لوحة مفاتيح مخصصة للمطورين والمصممين بمفاتيح قابلة للتبديل السريع وإضاءة RGB ذكية وبطارية تدوم حتى 200 ساعة.',
     price: 349,
     originalPrice: 420,
@@ -49,8 +49,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-3',
-    name: 'مساعد الذكاء الاصطناعي المنزلي Nexus Core AI',
-    nameEn: 'Nexus Core AI Smart Assistant',
+    name: 'مساعد الذكاء الاصطناعي المنزلي النخبة Core AI',
+    nameEn: 'Nokhba Core AI Smart Assistant',
     description: 'جهاز ذكاء اصطناعي محلي معالجة بدون إنترنت لحماية الخصوصية، تحكم متكامل بالأجهزة الذكية مع شاشة OLED تفاعلية.',
     price: 890,
     originalPrice: 1100,
@@ -62,7 +62,7 @@ export const mockProducts: Product[] = [
     inStock: true,
     featured: true,
     specs: {
-      'المعالج': 'Nexus Neural NPU 16 TOPS',
+      'المعالج': 'Nokhba Neural NPU 16 TOPS',
       'الذاكرة': '8GB LPDDR5',
       'بروتوكولات الدعم': 'Matter / Zigbee 3.0 / Thread / Wi-Fi 6E',
       'الشاشة': '3.5 بوصة AMOLED دائرية تعمل باللمس',
@@ -72,8 +72,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-4',
-    name: 'سماعات رأس عازلة للضوضاء Nexus Silence Pro',
-    nameEn: 'Nexus Silence Pro Headphones',
+    name: 'سماعات رأس عازلة للضوضاء النخبة Silence Pro',
+    nameEn: 'Nokhba Silence Pro Headphones',
     description: 'سماعات احترافية بعزل ضوضاء هجين وصوت مكاني ثلاثي الأبعاد مع ميكروفونات استوديو لعقد الاجتماعات النقية.',
     price: 720,
     originalPrice: 850,
@@ -95,8 +95,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-5',
-    name: 'مفتاح أمان مادي Nexus Security Key FIDO2',
-    nameEn: 'Nexus FIDO2 Hardware Key',
+    name: 'مفتاح أمان مادي النخبة Security Key FIDO2',
+    nameEn: 'Nokhba FIDO2 Hardware Key',
     description: 'مفتاح حماية ثنائي بيومتري بالأصمة لمنع الاختراقات وتأمين الحسابات السحابية ومصادقة WebAuthn/FIDO2.',
     price: 189,
     originalPrice: 220,
@@ -117,8 +117,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-6',
-    name: 'حزمة رخص وتطوير برمجيات Nexus Dev Suite Enterprise',
-    nameEn: 'Nexus Dev Suite License',
+    name: 'حزمة رخص وتطوير برمجيات النخبة Dev Suite Enterprise',
+    nameEn: 'Nokhba Dev Suite License',
     description: 'اشتراك سنوي شامل لأدوات التحليل البرمجي، واجهات برمجة التطبيقات المتقدمة، وخدمات CI/CD السحابية الآمنة.',
     price: 1250,
     originalPrice: 1500,
@@ -146,7 +146,7 @@ export const mockBlogPosts: BlogPost[] = [
     excerpt: 'كيف تعيد الوكلاء البرمجية ونماذج الذكاء الاصطناعي المستقلة تشكيل العمليات الرقمية واتخاذ القرارات الإستراتيجية في الشرق الأوسط.',
     content: [
       'يشهد قطاع الأعمال اليوم قفزة نوعية غير مسبوقة مع الانتقال من روبوتات المحادثة البسيطة إلى وكلاء الذكاء الاصطناعي القادرين على أتمتة سلاسل المهام المعقدة بدقة متناهية.',
-      'في منصة نيكسوس، رصدنا ارتفاعاً بنسبة 140% في اعتماد الشركات للحلول الذاتية في تحليل البيانات الضخمة وأتمتة العمليات المالية والخدمية.',
+      'في منصة النخبة، رصدنا ارتفاعاً بنسبة 140% في اعتماد الشركات للحلول الذاتية في تحليل البيانات الضخمة وأتمتة العمليات المالية والخدمية.',
       'الركيزة الأساسية لنجاح هذا التحول تكمن في الحوكمة وحماية خصوصية البيانات المحلية مع دمج نماذج اللغة المخصصة للهجات واللغة العربية.'
     ],
     coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80',
@@ -273,7 +273,7 @@ export const mockJobListings: JobListing[] = [
     typeLabel: 'دوام كامل',
     experience: '+4 سنوات خبرة',
     salaryRange: '22,000 - 30,000 د.م / شهرياً',
-    description: 'نبحث عن مهندس برمجيات أول للانضمام إلى فريق المنصات الأساسية في Nexus للمساهمة في بناء بنية تحتية سحابية فائقة الأداء وتطوير بوابات رقمية تخدم ملايين المستخدمين.',
+    description: 'نبحث عن مهندس برمجيات أول للانضمام إلى فريق المنصات الأساسية في النخبة للمساهمة في بناء بنية تحتية سحابية فائقة الأداء وتطوير بوابات رقمية تخدم ملايين المستخدمين.',
     responsibilities: [
       'تصميم وتطوير واجهات مستخدم تفاعلية وعالية الأداء باستخدام React و TypeScript و Next.js',
       'بناء واجهات برمجة تطبيقات RESTful و GraphQL سريعة وقابلة للتوسع باستخدام Node.js/Go',
@@ -306,9 +306,9 @@ export const mockJobListings: JobListing[] = [
     typeLabel: 'دوام كامل',
     experience: '+5 سنوات خبرة',
     salaryRange: '25,000 - 34,000 د.إ / شهرياً',
-    description: 'نقود تشكيل الهوية البصرية وتجربة الاستخدام لكافة منتجات Nexus الرقمية. ستقود فريق التصميم لوضع معايير هندسية وجمالية مبتكرة للأسواق العربية والعالمية.',
+    description: 'نقود تشكيل الهوية البصرية وتجربة الاستخدام لكافة منتجات النخبة الرقمية. ستقود فريق التصميم لوضع معايير هندسية وجمالية مبتكرة للأسواق العربية والعالمية.',
     responsibilities: [
-      'قيادة صياغة وتطوير نظام التصميم (Nexus Design System) الشامل للمنصة وتطبيقات الجوال',
+      'قيادة صياغة وتطوير نظام التصميم (Nokhba Design System) الشامل للمنصة وتطبيقات الجوال',
       'إجراء بحوث المستخدم واختبارات القابلية للتشغيل وتحويل الرؤى إلى تدفقات ونماذج أولية مبهرة',
       'التعاون الوثيق مع مدراء المنتجات وفرق الهندسة لضمان التطبيق الأمثل للمخرجات التصميمية'
     ],
@@ -336,7 +336,7 @@ export const mockJobListings: JobListing[] = [
     typeLabel: 'دوام كامل',
     experience: '+3 سنوات خبرة',
     salaryRange: '26,000 - 36,000 د.م / شهرياً',
-    description: 'المساهمة في بناء وتدريب وتطويع نماذج الذكاء الاصطناعي التوليدية المخصصة لحلول الأعمال ومحركات التوصية في Nexus Platform.',
+    description: 'المساهمة في بناء وتدريب وتطويع نماذج الذكاء الاصطناعي التوليدية المخصصة لحلول الأعمال ومحركات التوصية في منصة النخبة.',
     responsibilities: [
       'تطوير وتطبيق تقنيات استرجاع المعلومات المعزز بالتوليد (RAG) وتخصيص نماذج LLMs',
       'بناء أنابيب معالجة البيانات وتدريب النماذج ومراقبة أدائها في بيئات الإنتاج السحابية',
@@ -480,7 +480,7 @@ export const mockServices: ServiceItem[] = [
     deliverables: [
       'تقرير أمني تنفيذي وفني تفصيلي مع تصنيف درجات الخطورة',
       'خطة عمل علاجية ومساعدة الفرق الهندسية في تطبيق الإصلاحات',
-      'شهادة تدقيق أمني من Nexus Cyber Team'
+      'شهادة تدقيق أمني من فريق النخبة للأمن السيبراني'
     ],
     tags: ['Cybersecurity', 'Cloud Ops', 'Penetration Testing', 'NCA'],
     popular: false

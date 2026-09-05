@@ -39,7 +39,7 @@ export const PlatformStatsBento: React.FC<PlatformStatsBentoProps> = ({
             <span>نبض المنصة المباشر</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-['Alexandria']">
-            إحصائيات منظومة Nexus بالأرقام
+            إحصائيات منظومة النخبة بالأرقام
           </h2>
           <p className="text-slate-500 text-xs sm:text-sm mt-1">
             بيانات حية تعكس حجم المحتوى والعتاد والحلول والفرص المتاحة عبر المنصة

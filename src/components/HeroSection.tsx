@@ -26,11 +26,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           <div>
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold w-fit mb-4">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>مرحباً بكم في منصة نيكسوس</span>
+              <span>مرحباً بكم في منصة النخبة</span>
             </span>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight font-['Alexandria']">
-              متجر <span className="text-amber-600">نيكسوس</span> ومحتواك المفيد
+              متجر <span className="text-amber-600">النخبة</span> ومحتواك المفيد
             </h1>
 
             <p className="text-slate-500 text-sm sm:text-base max-w-xl leading-relaxed mb-6">

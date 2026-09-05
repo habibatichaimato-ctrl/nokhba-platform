@@ -85,7 +85,7 @@ export const AdminOverviewTab: React.FC<AdminOverviewTabProps> = ({
             <span>لوحة المراقبة والإدارة المركزية</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-extrabold text-white font-['Alexandria']">
-            أهلاً بك في غرفة عمليات منصة Nexus
+            أهلاً بك في غرفة عمليات منصة النخبة
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
             تحكم كامل في كافة العمليات: إدارة المتجر، نشر وتحديث المقالات، متابعة المرشحين للوظائف، ومعالجة طلبات الخدمات الاستشارية.
@@ -269,7 +269,7 @@ export const AdminOverviewTab: React.FC<AdminOverviewTabProps> = ({
             </div>
 
             <div className="flex items-center justify-between text-xs text-slate-400 pt-3">
-              <span>* البيانات محدثة ومزامنة مع مستودعات Nexus المركزية</span>
+              <span>* البيانات محدثة ومزامنة مع مستودعات النخبة المركزية</span>
               <span className="text-emerald-600 font-semibold font-['Alexandria']">نمو مستمر +24% على أساس فصلي</span>
             </div>
           </div>

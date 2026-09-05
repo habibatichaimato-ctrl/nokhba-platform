@@ -78,7 +78,7 @@ export const AdminSettingsTab: React.FC<AdminSettingsTabProps> = ({ settings, on
 
       const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const fileName = `nexus_backup_${Date.now()}.json`;
+      const fileName = `nokhba_backup_${Date.now()}.json`;
       const a = document.createElement('a');
       a.href = url;
       a.download = fileName;

@@ -116,7 +116,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold mb-3">
             <BookOpen className="w-3.5 h-3.5" />
-            <span>مدونة Nexus المعرفية التخصصية</span>
+            <span>مدونة النخبة المعرفية التخصصية</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
             رؤى وأبحاث تقنية تثري المحتوى العربي

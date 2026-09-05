@@ -62,7 +62,7 @@ const PrivacyContent: React.FC = () => (
     <p className="text-xs text-slate-400">آخر تحديث: {new Date().toLocaleDateString('ar')}</p>
 
     <p>
-      تحترم <strong>منصة نيكسوس (Nexus Platform)</strong> (يُشار إليها فيما يلي بـ "المنصة"، "نحن") خصوصية مستخدميها، وتلتزم بحماية بياناتهم الشخصية وفق هذه السياسة.
+      تحترم <strong>منصة النخبة</strong> (يُشار إليها فيما يلي بـ "المنصة"، "نحن") خصوصية مستخدميها، وتلتزم بحماية بياناتهم الشخصية وفق هذه السياسة.
     </p>
 
     <h3 className="font-bold text-slate-900 text-base pt-2">١. البيانات التي نجمعها</h3>
@@ -113,12 +113,12 @@ const TermsContent: React.FC = () => (
     <p className="text-xs text-slate-400">آخر تحديث: {new Date().toLocaleDateString('ar')}</p>
 
     <p>
-      يُرجى قراءة هذه الشروط بعناية قبل استخدام منصة نيكسوس. استخدامك للمنصة يعني موافقتك الكاملة على هذه الشروط.
+      يُرجى قراءة هذه الشروط بعناية قبل استخدام منصة النخبة. استخدامك للمنصة يعني موافقتك الكاملة على هذه الشروط.
     </p>
 
     <h3 className="font-bold text-slate-900 text-base pt-2">١. عن المنصة</h3>
     <p>
-      <strong>منصة نيكسوس (Nexus Platform)</strong> هي منصة رقمية تجمع متجراً إلكترونياً، مدونة، بوابة توظيف، وخدمات تقنية.
+      <strong>منصة النخبة</strong> هي منصة رقمية تجمع متجراً إلكترونياً، مدونة، بوابة توظيف، وخدمات تقنية.
     </p>
 
     <h3 className="font-bold text-slate-900 text-base pt-2">٢. الحسابات</h3>

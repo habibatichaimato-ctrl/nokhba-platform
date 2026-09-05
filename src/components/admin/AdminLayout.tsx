@@ -110,7 +110,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               </div>
               <div>
                 <h1 className="font-extrabold text-base text-white tracking-wide font-['Alexandria']">
-                  NEXUS <span className="text-amber-500 text-xs font-semibold">ADMIN</span>
+                  النخبة <span className="text-amber-500 text-xs font-semibold">ADMIN</span>
                 </h1>
                 <span className="text-[11px] text-slate-400 font-medium">بوابة الإدارة الشاملة</span>
               </div>
@@ -322,7 +322,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
         {/* Admin Footer */}
         <footer className="py-4 px-8 border-t border-slate-200 text-center text-xs text-slate-400 bg-white flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>منصة Nexus الرقمية &copy; {new Date().getFullYear()} - بيئة الإدارة الآمنة</span>
+          <span>منصة النخبة الرقمية &copy; {new Date().getFullYear()} - بيئة الإدارة الآمنة</span>
           <span className="text-[11px] text-slate-500 font-medium" dir="ltr" title={`Build ${__BUILD_COMMIT__}`}>
             {getDeploymentLabel()}
           </span>
