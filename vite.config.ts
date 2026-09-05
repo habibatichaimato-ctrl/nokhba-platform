@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/',
+    base: '/nokhba-platform/',
     
     // حقن معلومات النشر الحقيقية وقت البناء: تاريخ البناء + أول 7 رموز من معرّف التحديث على GitHub
     // GITHUB_SHA متوفر تلقائياً من GitHub Actions أثناء النشر، ولا حاجة لإعداده يدوياً
