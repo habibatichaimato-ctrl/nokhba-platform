@@ -166,7 +166,16 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
       id: editingPost ? editingPost.id : `post-${Date.now()}`,
       title: formData.title,
       excerpt: formData.excerpt,
-      content: formData.contentParagraphs.split('\n\n').filter(Boolean),
+      content: (() => {
+        const raw = formData.contentParagraphs.trim();
+        // نحاول الفصل أولاً بسطرين فارغين (الطريقة المفضلة)
+        let paragraphs = raw.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+        // لو النص كله التصق كفقرة واحدة (نسي المستخدم ترك سطر فارغ)، نفصل كل سطر لحاله كفقرة
+        if (paragraphs.length <= 1) {
+          paragraphs = raw.split('\n').map((p) => p.trim()).filter(Boolean);
+        }
+        return paragraphs;
+      })(),
       coverImage: formData.coverImage,
       author: {
         name: formData.authorName,

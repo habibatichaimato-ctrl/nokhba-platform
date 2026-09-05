@@ -19,6 +19,76 @@ import {
 } from 'lucide-react';
 import { BlogPost, BlogComment } from '../../types';
 
+// دالة بسيطة لتفسير الروابط والنصوص العريضة داخل سطر واحد
+// تدعم صيغة [نص](رابط) وصيغة **نص عريض**
+const renderInline = (text: string, keyPrefix: string) => {
+  const parts: React.ReactNode[] = [];
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let idx = 0;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] && match[2]) {
+      // رابط [نص](رابط)
+      parts.push(
+        <a
+          key={`${keyPrefix}-link-${idx++}`}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-amber-400 underline decoration-amber-500/50 hover:text-amber-300 font-bold"
+        >
+          {match[1]}
+        </a>
+      );
+    } else if (match[3]) {
+      // نص عريض **نص**
+      parts.push(<strong key={`${keyPrefix}-bold-${idx++}`}>{match[3]}</strong>);
+    }
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  return parts;
+};
+
+// دالة تحوّل فقرة نصية (قد تحتوي رموز ## للعناوين، * أو - للقوائم، وروابط) إلى عنصر مناسب
+const renderArticleParagraph = (paragraph: string, key: number) => {
+  const trimmed = paragraph.trim();
+
+  // عنوان فرعي كبير: يبدأ بـ ## أو ###
+  const headingMatch = trimmed.match(/^#{1,3}\s+(.*)$/);
+  if (headingMatch) {
+    return (
+      <h3 key={key} className="text-lg sm:text-xl font-bold text-white mt-6 mb-2 font-['Alexandria']">
+        {renderInline(headingMatch[1], `h-${key}`)}
+      </h3>
+    );
+  }
+
+  // عنصر قائمة: يبدأ بـ * أو -
+  const bulletMatch = trimmed.match(/^[*-]\s+(.*)$/);
+  if (bulletMatch) {
+    return (
+      <li key={key} className="leading-loose mr-4 list-disc">
+        {renderInline(bulletMatch[1], `li-${key}`)}
+      </li>
+    );
+  }
+
+  // فقرة عادية
+  return (
+    <p key={key} className="leading-loose">
+      {renderInline(trimmed, `p-${key}`)}
+    </p>
+  );
+};
+
 // تنسيق تاريخ النشر بشكل عربي مقروء (مثال: ٢٩ أغسطس ٢٠٢٦)
 const formatPublishedDate = (value: string): string => {
   const date = new Date(value);
@@ -116,7 +186,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold mb-3">
             <BookOpen className="w-3.5 h-3.5" />
-            <span>مدونة النخبة المعرفية التخصصية</span>
+            <span>مدونة Nexus المعرفية التخصصية</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
             رؤى وأبحاث تقنية تثري المحتوى العربي
@@ -412,11 +482,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
 
             {/* Article Content Paragraphs */}
             <div className="space-y-4 text-sm sm:text-base text-slate-200 leading-relaxed">
-              {activePostForModal.content.map((p, idx) => (
-                <p key={idx} className="leading-loose">
-                  {p}
-                </p>
-              ))}
+              {activePostForModal.content.map((p, idx) => renderArticleParagraph(p, idx))}
             </div>
 
             {/* Tags cloud */}
