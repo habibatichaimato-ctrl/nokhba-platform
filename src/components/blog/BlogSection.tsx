@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { 
   BookOpen, 
   Search, 
@@ -18,95 +20,6 @@ import {
   Check
 } from 'lucide-react';
 import { BlogPost, BlogComment } from '../../types';
-
-// دالة بسيطة لتفسير الروابط والنصوص العريضة داخل سطر واحد
-// تدعم الروابط المباشرة، وصيغة [نص](رابط)، وصيغة **نص عريض**
-const renderInline = (text: string, keyPrefix: string) => {
-  const parts: React.ReactNode[] = [];
-  const pattern = /\[([^\]]+)\]\(([^)]+)\)|(https?:\/\/[^\s<]+)|\*\*([^*]+)\*\*/g;
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  let idx = 0;
-
-  while ((match = pattern.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index));
-    }
-    if (match[1] && match[2]) {
-      // رابط [نص](رابط)
-      parts.push(
-        <a
-          key={`${keyPrefix}-link-${idx++}`}
-          href={match[2]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-amber-400 underline decoration-amber-500/50 hover:text-amber-300 font-bold"
-        >
-          {match[1]}
-        </a>
-      );
-    } else if (match[3]) {
-      const trailingPunctuation = match[3].match(/[.,!?،؛؟:)]*$/)?.[0] || '';
-      const url = trailingPunctuation
-        ? match[3].slice(0, -trailingPunctuation.length)
-        : match[3];
-
-      parts.push(
-        <React.Fragment key={`${keyPrefix}-url-${idx++}`}>
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-amber-400 underline decoration-amber-500/50 hover:text-amber-300 font-bold"
-          >
-            {url}
-          </a>
-          {trailingPunctuation}
-        </React.Fragment>
-      );
-    } else if (match[4]) {
-      // نص عريض **نص**
-      parts.push(<strong key={`${keyPrefix}-bold-${idx++}`}>{match[4]}</strong>);
-    }
-    lastIndex = pattern.lastIndex;
-  }
-  if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
-  }
-  return parts;
-};
-
-// دالة تحوّل فقرة نصية (قد تحتوي رموز ## للعناوين، * أو - للقوائم، وروابط) إلى عنصر مناسب
-const renderArticleParagraph = (paragraph: string, key: number) => {
-  const trimmed = paragraph.trim();
-
-  // عنوان فرعي كبير: يبدأ بـ ## أو ###
-  const headingMatch = trimmed.match(/^#{1,3}\s+(.*)$/);
-  if (headingMatch) {
-    return (
-      <h3 key={key} className="text-lg sm:text-xl font-bold text-white mt-6 mb-2 font-['Alexandria']">
-        {renderInline(headingMatch[1], `h-${key}`)}
-      </h3>
-    );
-  }
-
-  // عنصر قائمة: يبدأ بـ * أو -
-  const bulletMatch = trimmed.match(/^[*-]\s+(.*)$/);
-  if (bulletMatch) {
-    return (
-      <li key={key} className="leading-loose mr-4 list-disc">
-        {renderInline(bulletMatch[1], `li-${key}`)}
-      </li>
-    );
-  }
-
-  // فقرة عادية
-  return (
-    <p key={key} className="leading-loose">
-      {renderInline(trimmed, `p-${key}`)}
-    </p>
-  );
-};
 
 // تنسيق تاريخ النشر بشكل عربي مقروء (مثال: ٢٩ أغسطس ٢٠٢٦)
 const formatPublishedDate = (value: string): string => {
@@ -500,8 +413,17 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
             </div>
 
             {/* Article Content Paragraphs */}
-            <div className="space-y-4 whitespace-pre-line text-sm sm:text-base text-slate-200 leading-relaxed">
-              {activePostForModal.content.map((p, idx) => renderArticleParagraph(p, idx))}
+            <div className="space-y-4 whitespace-pre-line text-sm sm:text-base text-slate-200 leading-relaxed [&_h1]:mt-6 [&_h1]:mb-2 [&_h1]:text-xl [&_h1]:font-bold [&_h2]:mt-6 [&_h2]:mb-2 [&_h2]:text-lg [&_h2]:font-bold [&_h3]:mt-5 [&_h3]:mb-2 [&_h3]:font-bold [&_ul]:mr-5 [&_ul]:list-disc [&_ol]:mr-5 [&_ol]:list-decimal [&_li]:leading-loose [&_a]:break-all [&_a]:font-bold [&_a]:text-amber-400 [&_a]:underline [&_a]:decoration-amber-500/50 hover:[&_a]:text-amber-300">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: ({ node: _node, ...props }) => (
+                    <a {...props} target="_blank" rel="noopener noreferrer" />
+                  )
+                }}
+              >
+                {activePostForModal.content.join('\n\n')}
+              </ReactMarkdown>
             </div>
 
             {/* Tags cloud */}
