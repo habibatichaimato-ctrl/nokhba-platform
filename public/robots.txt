@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://aquamarine-gnome-7df35f.netlify.app/sitemap.xml
+Sitemap: https://habibatichaimato-ctrl.github.io/nokhba-platform/sitemap.xml
