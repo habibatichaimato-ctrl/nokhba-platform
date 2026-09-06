@@ -1,9 +1,3 @@
-// متغيرات معلومات النشر الحقيقية، يتم حقنها فعلياً وقت البناء من vite.config.ts
-declare global {
-  const __BUILD_DATE__: string;
-  const __BUILD_COMMIT__: string;
-}
-
 export type NavSection = 'home' | 'ecommerce' | 'blog' | 'careers' | 'admin';
 
 export type AdminTab = 'overview' | 'products' | 'blog' | 'careers' | 'users' | 'settings';
