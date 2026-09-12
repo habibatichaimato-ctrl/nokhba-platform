@@ -1,0 +1,23 @@
+{
+  "language": "العربية",
+  "switchTo": "English",
+  "header": {
+    "welcome": "مرحباً بك في منصة Nexus الرقمية المتكاملة",
+    "quality": "ضمان جودة وأمان 100%",
+    "support": "الدعم الفني",
+    "discount": "كود الخصم: NEXUS20",
+    "home": "الرئيسية",
+    "store": "المتجر الإلكتروني",
+    "careers": "بوابة الوظائف",
+    "blog": "المدونة والمعرفة",
+    "storeBadge": "خصم 20%",
+    "careersBadge": "توظيف نشط",
+    "search": "بحث في المنصة...",
+    "searchAria": "البحث في المنصة",
+    "cartAria": "عربة التسوق",
+    "admin": "لوحة الإدارة",
+    "mobileHome": "الصفحة الرئيسية",
+    "mobileSupport": "تواصلي مع الدعم الفني",
+    "mobileAdmin": "دخول لوحة تحكم المشرفين (Admin)"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "language": "English",
+  "switchTo": "العربية",
+  "header": {
+    "welcome": "Welcome to the integrated Nexus digital platform",
+    "quality": "100% quality and security guarantee",
+    "support": "Technical support",
+    "discount": "Discount code: NEXUS20",
+    "home": "Home",
+    "store": "Online store",
+    "careers": "Job portal",
+    "blog": "Blog and knowledge",
+    "storeBadge": "20% off",
+    "careersBadge": "Hiring now",
+    "search": "Search the platform...",
+    "searchAria": "Search the platform",
+    "cartAria": "Shopping cart",
+    "admin": "Admin dashboard",
+    "mobileHome": "Home page",
+    "mobileSupport": "Contact technical support",
+    "mobileAdmin": "Admin dashboard login"
+  }
+}

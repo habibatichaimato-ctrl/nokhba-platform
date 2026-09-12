@@ -17,7 +17,10 @@ import {
   Loader2
 } from 'lucide-react';
 import { BlogPost } from '../../../types';
+import { normalizeBlogContent } from '../../../types';
 import { supabase } from '../../../lib/supabaseClient';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 interface AdminBlogTabProps {
   posts: BlogPost[];
@@ -54,11 +57,11 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
-    contentParagraphs: '',
+    content: '',
     coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80',
     category: 'work-from-home' as BlogPost['category'],
     authorName: 'د. خالد العمري',
-    authorRole: 'باحث ومستشار نظم ذكاء اصطناعي',
+    authorRole: '',
     authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     readTime: '6 دقائق قراءة',
     tags: 'ذكاء اصطناعي, هندسة النظم, تعلم الآلة',
@@ -96,11 +99,11 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
     setFormData({
       title: '',
       excerpt: '',
-      contentParagraphs: 'المقدمة وشرح الفكرة الرئيسية للمقال...\n\nالتحليل العميق والتطبيقات الهندسية العملية...\n\nالخلاصة والتوصيات المستقبلية للمطورين.',
+      content: '<p>المقدمة وشرح الفكرة الرئيسية للمقال...</p><p>التحليل العميق والتطبيقات الهندسية العملية...</p><p>الخلاصة والتوصيات المستقبلية للمطورين.</p>',
       coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80',
       category: 'work-from-home',
       authorName: 'سارة المنصوري',
-      authorRole: 'كبير مهندسي المنصات السحابية',
+      authorRole: '',
       authorAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
       readTime: '5 دقائق قراءة',
       tags: 'تقنية, برمجة, ابتكار',
@@ -114,7 +117,7 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
     setFormData({
       title: post.title,
       excerpt: post.excerpt,
-      contentParagraphs: post.content.join('\n\n'),
+      content: normalizeBlogContent(post.content),
       coverImage: post.coverImage,
       category: post.category,
       authorName: post.author.name,
@@ -166,7 +169,7 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
       id: editingPost ? editingPost.id : `post-${Date.now()}`,
       title: formData.title,
       excerpt: formData.excerpt,
-      content: formData.contentParagraphs.split('\n\n').filter(Boolean),
+      content: formData.content,
       coverImage: formData.coverImage,
       author: {
         name: formData.authorName,
@@ -508,32 +511,36 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">محتوى المقال (افصل بين الفقرات بسطرين فارغين) *</label>
-                <textarea
-                  rows={6}
-                  required
-                  value={formData.contentParagraphs}
-                  onChange={(e) => setFormData({ ...formData, contentParagraphs: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:border-purple-500 font-mono leading-relaxed"
-                />
+                <label className="text-xs font-bold text-slate-700">محتوى المقال *</label>
+                <div dir="rtl" className="rounded-xl overflow-hidden border border-slate-200">
+                  <ReactQuill
+                    theme="snow"
+                    value={formData.content}
+                    onChange={(content) => setFormData({ ...formData, content })}
+                    modules={{
+                      toolbar: [
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic'],
+                        [{ align: ['', 'center', 'right'] }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ direction: 'rtl' }],
+                        ['link'],
+                        ['clean']
+                      ]
+                    }}
+                    formats={['header', 'bold', 'italic', 'align', 'list', 'direction', 'link']}
+                    className="bg-white text-slate-900"
+                  />
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 bg-slate-50 rounded-2xl border border-slate-200">
+              <div className="grid grid-cols-1 gap-4 p-3 bg-slate-50 rounded-2xl border border-slate-200">
                 <div className="space-y-1">
                   <label className="text-[11px] font-bold text-slate-600">اسم الكاتب</label>
                   <input
                     type="text"
                     value={formData.authorName}
                     onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                    className="w-full bg-white border border-slate-200 rounded-lg p-1.5 text-xs text-slate-900"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-600">صفة الكاتب</label>
-                  <input
-                    type="text"
-                    value={formData.authorRole}
-                    onChange={(e) => setFormData({ ...formData, authorRole: e.target.value })}
                     className="w-full bg-white border border-slate-200 rounded-lg p-1.5 text-xs text-slate-900"
                   />
                 </div>

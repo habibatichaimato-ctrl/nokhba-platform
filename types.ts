@@ -90,7 +90,7 @@ export interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
-  content: string[];
+  content: string;
   coverImage: string;
   author: {
     name: string;
@@ -107,6 +107,30 @@ export interface BlogPost {
   featured?: boolean;
   comments: BlogComment[];
 }
+
+export const normalizeBlogContent = (content: unknown): string => {
+  const html = Array.isArray(content)
+    ? content
+      .filter((paragraph): paragraph is string => typeof paragraph === 'string')
+      .map((paragraph) => `<p>${paragraph}</p>`)
+      .join('')
+    : typeof content === 'string' ? content : '';
+
+  if (typeof window === 'undefined') {
+    return html;
+  }
+
+  try {
+    const parsedDocument = new DOMParser().parseFromString(html, 'text/html');
+    parsedDocument.querySelectorAll('a').forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+    return parsedDocument.body.innerHTML;
+  } catch {
+    return html;
+  }
+};
 
 export interface JobListing {
   id: string;

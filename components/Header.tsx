@@ -14,6 +14,8 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { NavSection } from '../types';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
   activeSection: NavSection;
@@ -36,11 +38,12 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const navItems: { id: NavSection; label: string; icon: React.ComponentType<{ className?: string }>; badge?: string }[] = [
-    { id: 'ecommerce', label: 'المتجر الإلكتروني', icon: Store, badge: 'خصم 20%' },
-    { id: 'careers', label: 'بوابة الوظائف', icon: Briefcase, badge: 'توظيف نشط' },
-    { id: 'blog', label: 'المدونة والمعرفة', icon: BookOpen },
+    { id: 'ecommerce', label: t('header.store'), icon: Store, badge: t('header.storeBadge') },
+    { id: 'careers', label: t('header.careers'), icon: Briefcase, badge: t('header.careersBadge') },
+    { id: 'blog', label: t('header.blog'), icon: BookOpen },
   ];
 
   const handleNavClick = (section: NavSection) => {
@@ -56,11 +59,11 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>مرحباً بك في منصة Nexus الرقمية المتكاملة</span>
+              <span>{t('header.welcome')}</span>
             </span>
             <span className="hidden md:inline-flex items-center gap-1 text-slate-400">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>ضمان جودة وأمان 100%</span>
+              <span>{t('header.quality')}</span>
             </span>
           </div>
 
@@ -70,10 +73,10 @@ export const Header: React.FC<HeaderProps> = ({
               className="hidden sm:flex items-center gap-1 hover:text-amber-400 transition-colors"
             >
               <Headphones className="w-3.5 h-3.5 text-amber-400" />
-              <span>الدعم الفني</span>
+              <span>{t('header.support')}</span>
             </a>
             <span className="text-slate-700">|</span>
-            <span className="text-amber-400 font-bold">كود الخصم: NEXUS20</span>
+            <span className="text-amber-400 font-bold">{t('header.discount')}</span>
           </div>
         </div>
       </div>
@@ -103,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-slate-300 hover:text-amber-400'
               }`}
             >
-              الرئيسية
+              {t('header.home')}
             </button>
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -133,15 +136,16 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right Action Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher />
             {/* Global Search Pill Button */}
             <button
               id="global-search-trigger"
               onClick={onOpenSearch}
               className="relative flex items-center gap-2 bg-slate-800/90 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white rounded-full py-1.5 px-4 sm:px-6 text-xs transition-all"
-              aria-label="البحث في المنصة"
+              aria-label={t('header.searchAria')}
             >
               <Search className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden xl:inline">بحث في المنصة...</span>
+              <span className="hidden xl:inline">{t('header.search')}</span>
               <kbd className="hidden xl:inline-block text-[10px] bg-slate-900 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700 mr-1">
                 ⌘K
               </kbd>
@@ -152,7 +156,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="cart-drawer-trigger"
               onClick={onOpenCart}
               className="relative p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-full text-slate-200 hover:text-white transition-all focus:outline-none"
-              aria-label="عربة التسوق"
+              aria-label={t('header.cartAria')}
             >
               <ShoppingBag className="w-4 h-4" />
               {cartCount > 0 && (
@@ -173,7 +177,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>لوحة الإدارة</span>
+              <span>{t('header.admin')}</span>
             </button>
 
             {/* Mobile Hamburger Menu Toggle */}
@@ -201,7 +205,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'bg-slate-900 text-slate-200 hover:bg-slate-850'
               }`}
             >
-              <span>الصفحة الرئيسية</span>
+              <span>{t('header.mobileHome')}</span>
               <ArrowLeft className="w-4 h-4" />
             </button>
             {navItems.map((item) => {
@@ -238,7 +242,7 @@ export const Header: React.FC<HeaderProps> = ({
               className="w-full py-2.5 bg-slate-900 hover:bg-slate-850 text-amber-400 border border-amber-500/30 font-bold rounded-2xl flex items-center justify-center gap-2 text-sm"
             >
               <Headphones className="w-4 h-4" />
-              <span>تواصلي مع الدعم الفني</span>
+              <span>{t('header.mobileSupport')}</span>
             </a>
 
             <button
@@ -246,7 +250,7 @@ export const Header: React.FC<HeaderProps> = ({
               className="w-full py-2.5 bg-slate-900 hover:bg-slate-850 text-amber-400 border border-amber-500/30 font-bold rounded-2xl flex items-center justify-center gap-2 text-sm"
             >
               <ShieldCheck className="w-4 h-4" />
-              <span>دخول لوحة تحكم المشرفين (Admin)</span>
+              <span>{t('header.mobileAdmin')}</span>
             </button>
           </div>
         </div>

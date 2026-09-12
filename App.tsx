@@ -11,6 +11,7 @@ import {
   AdminUser,
   OrderDetails,
   AdminNotification
+  , normalizeBlogContent
 } from './types';
 import { mockProducts, mockBlogPosts, mockJobListings } from './data/mockData';
 import { supabase } from './lib/supabaseClient';
@@ -178,7 +179,7 @@ export default function App() {
           id: row.id,
           title: row.title,
           excerpt: row.excerpt,
-          content: row.content,
+          content: normalizeBlogContent(row.content),
           coverImage: row.cover_image,
           author: row.author,
           category: row.category,
@@ -291,6 +292,14 @@ export default function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [adminAuthChecked, setAdminAuthChecked] = useState(false);
 
+  const handleAdminTabChange = (tab: AdminTab) => {
+    if ((tab === 'users' || tab === 'settings') && currentAdmin?.role !== 'super_admin') {
+      setAdminTab('overview');
+      return;
+    }
+    setAdminTab(tab);
+  };
+
   // دالة مساعدة: تجلب بيانات الأدمن الحقيقية من جدول admins
   const loadAdminProfile = async (userId: string, userEmail: string) => {
     const { data, error } = await supabase
@@ -301,18 +310,10 @@ export default function App() {
 
     if (error || !data) {
       console.error('تعذر جلب بيانات الأدمن من قاعدة البيانات:', error?.message);
-      // قيمة احتياطية إذا لم يوجد سجل بعد في جدول admins
-      setCurrentAdmin({
-        id: userId,
-        name: userEmail.split('@')[0] || 'مشرف',
-        email: userEmail,
-        role: 'support',
-        roleLabel: 'غير محدد',
-        avatar: '',
-        status: 'active',
-        lastLogin: new Date().toISOString(),
-        createdAt: new Date().toISOString()
-      });
+      await supabase.auth.signOut();
+      setCurrentAdmin(null);
+      setAdminTab('overview');
+      addToast('error', 'رفض الوصول', 'هذا الحساب لا يملك صلاحية الوصول للوحة التحكم');
       return;
     }
 
@@ -977,13 +978,17 @@ export default function App() {
       .slice(0, 10)
       .map(({ _sortDate, ...rest }) => rest);
 
+    const visibleAdminTab = (adminTab === 'users' || adminTab === 'settings') && currentAdmin.role !== 'super_admin'
+      ? 'overview'
+      : adminTab;
+
     return (
       <div className="min-h-screen bg-slate-100 text-slate-900 font-sans" dir="rtl">
         <ToastContainer toasts={toasts} onDismiss={removeToast} />
         
         <AdminLayout
-          currentTab={adminTab}
-          onSelectTab={setAdminTab}
+          currentTab={visibleAdminTab}
+          onSelectTab={handleAdminTabChange}
           currentAdmin={currentAdmin}
           notifications={adminNotifications}
           onMarkAllNotificationsRead={() => handleMarkAllNotificationsRead(adminNotifications.map((n) => n.id))}
@@ -993,20 +998,20 @@ export default function App() {
           }}
           onReturnToPublic={() => handleNavigate('home')}
         >
-          {adminTab === 'overview' && (
+          {visibleAdminTab === 'overview' && (
             <AdminOverviewTab
               products={products}
               blogPosts={blogPosts}
               jobs={jobs}
               orders={orders}
-              onNavigateTab={setAdminTab}
-              onOpenAddProductModal={() => setAdminTab('products')}
-              onOpenAddBlogModal={() => setAdminTab('blog')}
-              onOpenAddJobModal={() => setAdminTab('careers')}
+              onNavigateTab={handleAdminTabChange}
+              onOpenAddProductModal={() => handleAdminTabChange('products')}
+              onOpenAddBlogModal={() => handleAdminTabChange('blog')}
+              onOpenAddJobModal={() => handleAdminTabChange('careers')}
             />
           )}
 
-          {adminTab === 'products' && (
+          {visibleAdminTab === 'products' && (
             <AdminProductsTab
               products={products}
               onAddProduct={handleAddProduct}
@@ -1015,7 +1020,7 @@ export default function App() {
             />
           )}
 
-          {adminTab === 'blog' && (
+          {visibleAdminTab === 'blog' && (
             <AdminBlogTab
               posts={blogPosts}
               onAddPost={handleAddPost}
@@ -1024,7 +1029,7 @@ export default function App() {
             />
           )}
 
-          {adminTab === 'careers' && (
+          {visibleAdminTab === 'careers' && (
             <AdminCareersTab
               jobs={jobs}
               applications={jobApplications}
@@ -1034,9 +1039,9 @@ export default function App() {
             />
           )}
 
-          {adminTab === 'visits' && <AdminVisitsTab />}
+          {visibleAdminTab === 'visits' && <AdminVisitsTab />}
 
-          {adminTab === 'users' && (
+          {visibleAdminTab === 'users' && (
             <AdminUsersTab
               currentAdmin={currentAdmin}
               admins={teamAdmins}
@@ -1045,7 +1050,7 @@ export default function App() {
             />
           )}
 
-          {adminTab === 'settings' && (
+          {visibleAdminTab === 'settings' && (
             <AdminSettingsTab
               settings={platformSettings}
               onSave={handleSavePlatformSettings}
@@ -1064,7 +1069,7 @@ export default function App() {
 
   // Regular Public Portal Rendering
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-slate-950 font-sans" dir="rtl">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-slate-950 font-sans">
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   LayoutDashboard, 
   ShoppingBag, 
@@ -57,6 +57,16 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
+  const isSuperAdmin = currentAdmin.role === 'super_admin';
+  const isRestrictedTab = currentTab === 'users' || currentTab === 'settings';
+  const visibleTab = !isSuperAdmin && isRestrictedTab ? 'overview' : currentTab;
+
+  useEffect(() => {
+    if (!isSuperAdmin && isRestrictedTab) {
+      onSelectTab('overview');
+    }
+  }, [isRestrictedTab, isSuperAdmin, onSelectTab]);
+
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const navItems = [
@@ -67,7 +77,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
     { id: 'visits' as AdminTab, label: 'تحليلات الزيارات', icon: Eye, badge: null },
     { id: 'users' as AdminTab, label: 'المستخدمين والصلاحيات', icon: Users, badge: null },
     { id: 'settings' as AdminTab, label: 'إعدادات النظام والأمان', icon: Settings, badge: null },
-  ];
+  ].filter((item) => isSuperAdmin || (item.id !== 'users' && item.id !== 'settings'));
 
   const handleMarkAllRead = () => {
     onMarkAllNotificationsRead();
@@ -134,7 +144,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = currentTab === item.id;
+              const isActive = visibleTab === item.id;
               return (
                 <button
                   key={item.id}
@@ -229,10 +239,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               <div className="text-[11px] text-slate-400 font-semibold flex items-center gap-1">
                 <span>لوحة التحكم</span>
                 <ChevronLeft className="w-3 h-3" />
-                <span className="text-amber-600 font-bold">{getTabTitle(currentTab)}</span>
+                <span className="text-amber-600 font-bold">{getTabTitle(visibleTab)}</span>
               </div>
               <h2 className="text-base sm:text-lg font-extrabold text-slate-900 font-['Alexandria'] hidden sm:block">
-                {getTabTitle(currentTab)}
+                {getTabTitle(visibleTab)}
               </h2>
             </div>
           </div>

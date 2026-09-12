@@ -17,7 +17,7 @@ import {
   ThumbsUp,
   Check
 } from 'lucide-react';
-import { BlogPost, BlogComment } from '../../types';
+import { BlogPost, BlogComment, normalizeBlogContent } from '../../types';
 
 // تنسيق تاريخ النشر بشكل عربي مقروء (مثال: ٢٩ أغسطس ٢٠٢٦)
 const formatPublishedDate = (value: string): string => {
@@ -183,7 +183,9 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                 />
                 <div>
                   <h4 className="text-xs font-bold text-white">{featuredPost.author.name}</h4>
-                  <p className="text-[11px] text-slate-400">{featuredPost.author.role}</p>
+                  {featuredPost.author.role && (
+                    <p className="text-[11px] text-slate-400">{featuredPost.author.role}</p>
+                  )}
                 </div>
               </div>
 
@@ -376,7 +378,9 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                   />
                   <div>
                     <h4 className="text-sm font-bold text-white">{activePostForModal.author.name}</h4>
-                    <p className="text-xs text-slate-400">{activePostForModal.author.role}</p>
+                    {activePostForModal.author.role && (
+                      <p className="text-xs text-slate-400">{activePostForModal.author.role}</p>
+                    )}
                   </div>
                 </div>
 
@@ -410,21 +414,27 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
               />
             </div>
 
-            {/* Article Content Paragraphs */}
-            <div className="space-y-4 text-sm sm:text-base text-slate-200 leading-relaxed">
-              {activePostForModal.content.map((p, idx) => (
-                <p key={idx} className="leading-loose">
-                  {p}
-                </p>
-              ))}
-            </div>
+            {/* Article Content */}
+            <div
+              className="blog-article-content prose prose-invert max-w-none text-sm sm:text-base text-slate-200 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: normalizeBlogContent(activePostForModal.content) }}
+            />
 
             {/* Tags cloud */}
             <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
               {activePostForModal.tags.map((tag, idx) => (
-                <span key={idx} className="text-xs bg-slate-950 text-slate-300 px-3 py-1 rounded-lg border border-slate-800">
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory('all');
+                    setSearchQuery(tag);
+                    setActivePostForModal(null);
+                  }}
+                  className="text-xs bg-slate-950 text-slate-300 px-3 py-1 rounded-lg border border-slate-800 hover:text-purple-300 hover:border-purple-500 transition-colors"
+                >
                   #{tag}
-                </span>
+                </button>
               ))}
             </div>
 
