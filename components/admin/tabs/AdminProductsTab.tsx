@@ -186,6 +186,7 @@ export const AdminProductsTab: React.FC<AdminProductsTabProps> = ({
 
     const productPayload: Product = {
       id: editingProduct ? editingProduct.id : `prod-${Date.now()}`,
+      slug: editingProduct?.slug || '',
       name: formData.name,
       nameEn: formData.nameEn,
       description: formData.description,

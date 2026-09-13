@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   NavSection, 
   CartItem, 
@@ -26,6 +27,10 @@ import { BlogSection } from './components/blog/BlogSection';
 import { CareersSection } from './components/careers/CareersSection';
 import { GlobalSearchModal } from './components/GlobalSearchModal';
 import { ToastContainer } from './components/Toast';
+import { BlogPostPage } from './components/details/BlogPostPage';
+import { ProductPage } from './components/details/ProductPage';
+import { JobPage } from './components/details/JobPage';
+import { createSlug, createUniqueSlug } from './lib/slugs';
 
 // Admin Components
 import { AdminLayout } from './components/admin/AdminLayout';
@@ -58,6 +63,9 @@ const formatRelativeTime = (value: string): string => {
 export default function App() {
   // تسجيل زيارة المنصة تلقائياً (مرة واحدة لكل جلسة متصفح)، دون التأثير على بقية التطبيق
   useVisitorTracking();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [activeSection, setActiveSection] = useState<NavSection>('home');
 
@@ -137,6 +145,7 @@ export default function App() {
       if (data) {
         const mapped: Product[] = data.map((row: any) => ({
           id: row.id,
+          slug: row.slug || createSlug(row.name),
           name: row.name,
           nameEn: row.name_en,
           description: row.description,
@@ -177,6 +186,7 @@ export default function App() {
       if (data) {
         const mapped: BlogPost[] = data.map((row: any) => ({
           id: row.id,
+          slug: row.slug || createSlug(row.title),
           title: row.title,
           excerpt: row.excerpt,
           content: normalizeBlogContent(row.content),
@@ -217,6 +227,7 @@ export default function App() {
       if (data) {
         const mapped: JobListing[] = data.map((row: any) => ({
           id: row.id,
+          slug: row.slug || createSlug(row.title),
           title: row.title,
           department: row.department,
           departmentLabel: row.department_label,
@@ -534,6 +545,7 @@ export default function App() {
 
   const handleNavigate = (section: NavSection) => {
     setActiveSection(section);
+    navigate(section === 'home' ? '/' : `/${section === 'ecommerce' ? 'products' : section}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -678,24 +690,26 @@ export default function App() {
 
   // Product CRUD (Admin)
   const handleAddProduct = (newProduct: Product) => {
-    setProducts((prev) => [newProduct, ...prev]);
+    const productWithSlug = { ...newProduct, slug: createUniqueSlug(newProduct.name, products) };
+    setProducts((prev) => [productWithSlug, ...prev]);
     // حفظ المنتج في قاعدة البيانات الحقيقية بشكل دائم
     supabase.from('products').insert({
-      id: newProduct.id,
-      name: newProduct.name,
-      name_en: newProduct.nameEn,
-      description: newProduct.description,
-      price: newProduct.price,
-      original_price: newProduct.originalPrice,
-      category: newProduct.category,
-      category_label: newProduct.categoryLabel,
-      image: newProduct.image,
-      rating: newProduct.rating,
-      reviews_count: newProduct.reviewsCount,
-      in_stock: newProduct.inStock,
-      featured: newProduct.featured,
-      specs: newProduct.specs,
-      tags: newProduct.tags
+      id: productWithSlug.id,
+      slug: productWithSlug.slug,
+      name: productWithSlug.name,
+      name_en: productWithSlug.nameEn,
+      description: productWithSlug.description,
+      price: productWithSlug.price,
+      original_price: productWithSlug.originalPrice,
+      category: productWithSlug.category,
+      category_label: productWithSlug.categoryLabel,
+      image: productWithSlug.image,
+      rating: productWithSlug.rating,
+      reviews_count: productWithSlug.reviewsCount,
+      in_stock: productWithSlug.inStock,
+      featured: productWithSlug.featured,
+      specs: productWithSlug.specs,
+      tags: productWithSlug.tags
     }).then(({ error }) => {
       if (error) {
         console.error('تعذر حفظ المنتج في قاعدة البيانات:', error.message);
@@ -707,10 +721,12 @@ export default function App() {
   };
 
   const handleUpdateProduct = (updatedProduct: Product) => {
-    setProducts((prev) => prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p)));
+    const productWithSlug = { ...updatedProduct, slug: createUniqueSlug(updatedProduct.name, products, updatedProduct.id) };
+    setProducts((prev) => prev.map((p) => (p.id === productWithSlug.id ? productWithSlug : p)));
     // تحديث المنتج في قاعدة البيانات الحقيقية بشكل دائم
     supabase.from('products').update({
-      name: updatedProduct.name,
+      slug: productWithSlug.slug,
+      name: productWithSlug.name,
       name_en: updatedProduct.nameEn,
       description: updatedProduct.description,
       price: updatedProduct.price,
@@ -750,23 +766,25 @@ export default function App() {
 
   // Blog CRUD (Admin)
   const handleAddPost = (newPost: BlogPost) => {
-    setBlogPosts((prev) => [newPost, ...prev]);
+    const postWithSlug = { ...newPost, slug: createUniqueSlug(newPost.title, blogPosts) };
+    setBlogPosts((prev) => [postWithSlug, ...prev]);
     supabase.from('blog_posts').insert({
-      id: newPost.id,
-      title: newPost.title,
-      excerpt: newPost.excerpt,
-      content: newPost.content,
-      cover_image: newPost.coverImage,
-      author: newPost.author,
-      category: newPost.category,
-      category_label: newPost.categoryLabel,
-      tags: newPost.tags,
-      read_time: newPost.readTime,
-      published_at: newPost.publishedAt,
-      likes_count: newPost.likesCount,
-      views_count: newPost.viewsCount,
-      featured: newPost.featured,
-      comments: newPost.comments
+      id: postWithSlug.id,
+      slug: postWithSlug.slug,
+      title: postWithSlug.title,
+      excerpt: postWithSlug.excerpt,
+      content: postWithSlug.content,
+      cover_image: postWithSlug.coverImage,
+      author: postWithSlug.author,
+      category: postWithSlug.category,
+      category_label: postWithSlug.categoryLabel,
+      tags: postWithSlug.tags,
+      read_time: postWithSlug.readTime,
+      published_at: postWithSlug.publishedAt,
+      likes_count: postWithSlug.likesCount,
+      views_count: postWithSlug.viewsCount,
+      featured: postWithSlug.featured,
+      comments: postWithSlug.comments
     }).then(({ error }) => {
       if (error) {
         console.error('تعذر حفظ المقال في قاعدة البيانات:', error.message);
@@ -778,26 +796,28 @@ export default function App() {
   };
 
   const handleUpdatePost = (updatedPost: BlogPost) => {
-    setBlogPosts((prev) => prev.map((p) => (p.id === updatedPost.id ? updatedPost : p)));
+    const postWithSlug = { ...updatedPost, slug: createUniqueSlug(updatedPost.title, blogPosts, updatedPost.id) };
+    setBlogPosts((prev) => prev.map((p) => (p.id === postWithSlug.id ? postWithSlug : p)));
     supabase.from('blog_posts').update({
-      title: updatedPost.title,
+      slug: postWithSlug.slug,
+      title: postWithSlug.title,
       excerpt: updatedPost.excerpt,
       content: updatedPost.content,
       cover_image: updatedPost.coverImage,
       author: updatedPost.author,
       category: updatedPost.category,
       category_label: updatedPost.categoryLabel,
-      tags: updatedPost.tags,
-      read_time: updatedPost.readTime,
-      published_at: updatedPost.publishedAt,
-      featured: updatedPost.featured
-    }).eq('id', updatedPost.id).then(({ error }) => {
+      tags: postWithSlug.tags,
+      read_time: postWithSlug.readTime,
+      published_at: postWithSlug.publishedAt,
+      featured: postWithSlug.featured
+    }).eq('id', postWithSlug.id).then(({ error }) => {
       if (error) {
         console.error('تعذر تحديث المقال في قاعدة البيانات:', error.message);
         addToast('error', 'فشل تحديث المقال', 'لم يتم حفظ التعديلات في قاعدة البيانات، يرجى المحاولة مرة أخرى.');
         return;
       }
-      addToast('success', 'تم تحديث المقال', `تم حفظ تعديلات مقال "${updatedPost.title}".`);
+      addToast('success', 'تم تحديث المقال', `تم حفظ تعديلات مقال "${postWithSlug.title}".`);
     });
   };
 
@@ -816,24 +836,26 @@ export default function App() {
 
   // Job CRUD (Admin)
   const handleAddJob = (newJob: JobListing) => {
-    setJobs((prev) => [newJob, ...prev]);
+    const jobWithSlug = { ...newJob, slug: createUniqueSlug(newJob.title, jobs) };
+    setJobs((prev) => [jobWithSlug, ...prev]);
     supabase.from('jobs').insert({
-      id: newJob.id,
-      title: newJob.title,
-      department: newJob.department,
-      department_label: newJob.departmentLabel,
-      location: newJob.location,
-      type: newJob.type,
-      type_label: newJob.typeLabel,
-      experience: newJob.experience,
-      salary_range: newJob.salaryRange,
-      description: newJob.description,
-      responsibilities: newJob.responsibilities,
-      requirements: newJob.requirements,
-      benefits: newJob.benefits,
-      is_urgent: newJob.isUrgent,
-      is_remote: newJob.isRemote,
-      posted_at: newJob.postedAt
+      id: jobWithSlug.id,
+      slug: jobWithSlug.slug,
+      title: jobWithSlug.title,
+      department: jobWithSlug.department,
+      department_label: jobWithSlug.departmentLabel,
+      location: jobWithSlug.location,
+      type: jobWithSlug.type,
+      type_label: jobWithSlug.typeLabel,
+      experience: jobWithSlug.experience,
+      salary_range: jobWithSlug.salaryRange,
+      description: jobWithSlug.description,
+      responsibilities: jobWithSlug.responsibilities,
+      requirements: jobWithSlug.requirements,
+      benefits: jobWithSlug.benefits,
+      is_urgent: jobWithSlug.isUrgent,
+      is_remote: jobWithSlug.isRemote,
+      posted_at: jobWithSlug.postedAt
     }).then(({ error }) => {
       if (error) {
         console.error('تعذر حفظ الوظيفة في قاعدة البيانات:', error.message);
@@ -845,29 +867,31 @@ export default function App() {
   };
 
   const handleUpdateJob = (updatedJob: JobListing) => {
-    setJobs((prev) => prev.map((j) => (j.id === updatedJob.id ? updatedJob : j)));
+    const jobWithSlug = { ...updatedJob, slug: createUniqueSlug(updatedJob.title, jobs, updatedJob.id) };
+    setJobs((prev) => prev.map((j) => (j.id === jobWithSlug.id ? jobWithSlug : j)));
     supabase.from('jobs').update({
-      title: updatedJob.title,
-      department: updatedJob.department,
-      department_label: updatedJob.departmentLabel,
-      location: updatedJob.location,
-      type: updatedJob.type,
-      type_label: updatedJob.typeLabel,
-      experience: updatedJob.experience,
-      salary_range: updatedJob.salaryRange,
-      description: updatedJob.description,
-      responsibilities: updatedJob.responsibilities,
-      requirements: updatedJob.requirements,
-      benefits: updatedJob.benefits,
-      is_urgent: updatedJob.isUrgent,
-      is_remote: updatedJob.isRemote
-    }).eq('id', updatedJob.id).then(({ error }) => {
+      slug: jobWithSlug.slug,
+      title: jobWithSlug.title,
+      department: jobWithSlug.department,
+      department_label: jobWithSlug.departmentLabel,
+      location: jobWithSlug.location,
+      type: jobWithSlug.type,
+      type_label: jobWithSlug.typeLabel,
+      experience: jobWithSlug.experience,
+      salary_range: jobWithSlug.salaryRange,
+      description: jobWithSlug.description,
+      responsibilities: jobWithSlug.responsibilities,
+      requirements: jobWithSlug.requirements,
+      benefits: jobWithSlug.benefits,
+      is_urgent: jobWithSlug.isUrgent,
+      is_remote: jobWithSlug.isRemote
+    }).eq('id', jobWithSlug.id).then(({ error }) => {
       if (error) {
         console.error('تعذر تحديث الوظيفة في قاعدة البيانات:', error.message);
         addToast('error', 'فشل تحديث الشاغر', 'لم يتم حفظ التعديلات في قاعدة البيانات، يرجى المحاولة مرة أخرى.');
         return;
       }
-      addToast('success', 'تم تحديث الشاغر', `تم حفظ التعديلات على وظيفة "${updatedJob.title}".`);
+      addToast('success', 'تم تحديث الشاغر', `تم حفظ التعديلات على وظيفة "${jobWithSlug.title}".`);
     });
   };
 
@@ -885,6 +909,22 @@ export default function App() {
   };
 
   const totalCartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const pathParts = location.pathname.split('/').filter(Boolean);
+  const isBlogDetail = pathParts[0] === 'blog' && pathParts.length === 2;
+  const isProductDetail = pathParts[0] === 'products' && pathParts.length === 2;
+  const isJobDetail = pathParts[0] === 'careers' && pathParts.length === 2;
+  const detailSlug = pathParts[1] ? decodeURIComponent(pathParts[1]) : '';
+  const detailPost = isBlogDetail ? blogPosts.find((post) => post.slug === detailSlug) : undefined;
+  const detailProduct = isProductDetail ? products.find((product) => product.slug === detailSlug) : undefined;
+  const detailJob = isJobDetail ? jobs.find((job) => job.slug === detailSlug) : undefined;
+  const visibleSection: NavSection = isProductDetail || pathParts[0] === 'products'
+    ? 'ecommerce'
+    : isBlogDetail || pathParts[0] === 'blog'
+      ? 'blog'
+      : isJobDetail || pathParts[0] === 'careers'
+        ? 'careers'
+        : activeSection;
+  const isDetailRoute = isBlogDetail || isProductDetail || isJobDetail;
 
   // وضع الصيانة الحقيقي: يحجب الموقع العام عن الزوار فقط، ولوحة الإدارة تبقى مفتوحة دائماً
   if (platformSettings.maintenanceMode && activeSection !== 'admin') {
@@ -1075,7 +1115,7 @@ export default function App() {
 
       {/* Main Header */}
       <Header
-        activeSection={activeSection}
+        activeSection={visibleSection}
         onNavigate={handleNavigate}
         cartCount={totalCartItemCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -1084,7 +1124,16 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-6">
-        {activeSection === 'home' && (
+        {isBlogDetail && detailPost && (
+          <BlogPostPage post={detailPost} onAddComment={handleAddComment} onToggleLike={handleToggleLike} onViewPost={handleViewPost} />
+        )}
+        {isProductDetail && detailProduct && (
+          <ProductPage product={detailProduct} onAddToCart={handleAddToCart} />
+        )}
+        {isJobDetail && detailJob && (
+          <JobPage job={detailJob} onSubmitApplication={handleSubmitJobApplication} />
+        )}
+        {visibleSection === 'home' && !isDetailRoute && (
           <div className="space-y-12">
             <HeroSection
               onNavigate={handleNavigate}
@@ -1148,7 +1197,7 @@ export default function App() {
         )}
 
         {/* Section 1: E-commerce */}
-        {activeSection === 'ecommerce' && (
+        {visibleSection === 'ecommerce' && !isDetailRoute && (
           <EcommerceSection
             products={products}
             cart={cart}
@@ -1162,7 +1211,7 @@ export default function App() {
         )}
 
         {/* Section 2: Blog */}
-        {activeSection === 'blog' && (
+        {visibleSection === 'blog' && !isDetailRoute && (
           <BlogSection
             posts={blogPosts}
             onAddComment={handleAddComment}
@@ -1172,7 +1221,7 @@ export default function App() {
         )}
 
         {/* Section 3: Careers */}
-        {activeSection === 'careers' && (
+        {visibleSection === 'careers' && !isDetailRoute && (
           <CareersSection
             jobs={jobs}
             onSubmitApplication={handleSubmitJobApplication}

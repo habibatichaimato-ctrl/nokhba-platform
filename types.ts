@@ -40,6 +40,7 @@ export interface AdminActivityLog {
 
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   nameEn?: string;
   description: string;
@@ -88,6 +89,7 @@ export interface BlogComment {
 
 export interface BlogPost {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
   content: string;
@@ -134,6 +136,7 @@ export const normalizeBlogContent = (content: unknown): string => {
 
 export interface JobListing {
   id: string;
+  slug: string;
   title: string;
   department: 'tech' | 'marketing-sales' | 'admin' | 'finance' | 'design-creative' | 'writing-translation' | 'education' | 'logistics' | 'healthcare' | 'customer-support' | 'remote-freelance' | 'crafts';
   departmentLabel: string;

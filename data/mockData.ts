@@ -3,6 +3,7 @@ import { Product, BlogPost, JobListing } from '../types';
 export const mockProducts: Product[] = [
   {
     id: 'prod-1',
+    slug: 'محطة-العمل-الذكية-nexus-studio-pro',
     name: 'محطة العمل الذكية Nexus Studio Pro',
     nameEn: 'Nexus Studio Pro Hub',
     description: 'محطة إرساء وتوصيل متعددة المنافذ بقدرة 100W مع دعم شاشات 4K المزدوجة ونقل بيانات فائق السرعة بسرعة 40Gbps.',
@@ -26,6 +27,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-2',
+    slug: 'لوحة-مفاتيح-ميكانيكية-لاسلكية-nexus-apex',
     name: 'لوحة مفاتيح ميكانيكية لاسلكية Nexus Apex',
     nameEn: 'Nexus Apex Mechanical Keyboard',
     description: 'لوحة مفاتيح مخصصة للمطورين والمصممين بمفاتيح قابلة للتبديل السريع وإضاءة RGB ذكية وبطارية تدوم حتى 200 ساعة.',
@@ -49,6 +51,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-3',
+    slug: 'مساعد-الذكاء-الاصطناعي-المنزلي-nexus-core-ai',
     name: 'مساعد الذكاء الاصطناعي المنزلي Nexus Core AI',
     nameEn: 'Nexus Core AI Smart Assistant',
     description: 'جهاز ذكاء اصطناعي محلي معالجة بدون إنترنت لحماية الخصوصية، تحكم متكامل بالأجهزة الذكية مع شاشة OLED تفاعلية.',
@@ -72,6 +75,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-4',
+    slug: 'سماعات-راس-عازلة-للضوضاء-nexus-silence-pro',
     name: 'سماعات رأس عازلة للضوضاء Nexus Silence Pro',
     nameEn: 'Nexus Silence Pro Headphones',
     description: 'سماعات احترافية بعزل ضوضاء هجين وصوت مكاني ثلاثي الأبعاد مع ميكروفونات استوديو لعقد الاجتماعات النقية.',
@@ -95,6 +99,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-5',
+    slug: 'مفتاح-امان-مادي-nexus-security-key-fido2',
     name: 'مفتاح أمان مادي Nexus Security Key FIDO2',
     nameEn: 'Nexus FIDO2 Hardware Key',
     description: 'مفتاح حماية ثنائي بيومتري بالأصمة لمنع الاختراقات وتأمين الحسابات السحابية ومصادقة WebAuthn/FIDO2.',
@@ -117,6 +122,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'prod-6',
+    slug: 'حزمة-رخص-وتطوير-برمجيات-nexus-dev-suite-enterprise',
     name: 'حزمة رخص وتطوير برمجيات Nexus Dev Suite Enterprise',
     nameEn: 'Nexus Dev Suite License',
     description: 'اشتراك سنوي شامل لأدوات التحليل البرمجي، واجهات برمجة التطبيقات المتقدمة، وخدمات CI/CD السحابية الآمنة.',
@@ -142,6 +148,7 @@ export const mockProducts: Product[] = [
 export const mockBlogPosts: BlogPost[] = [
   {
     id: 'post-1',
+    slug: 'مستقبل-الذكاء-الاصطناعي-التوليدي-في-بيئات-العمل-المؤسسية-2026',
     title: 'مستقبل الذكاء الاصطناعي التوليدي في بيئات العمل المؤسسية 2026',
     excerpt: 'كيف تعيد الوكلاء البرمجية ونماذج الذكاء الاصطناعي المستقلة تشكيل العمليات الرقمية واتخاذ القرارات الإستراتيجية في الشرق الأوسط.',
     content: '<p>يشهد قطاع الأعمال اليوم قفزة نوعية غير مسبوقة مع الانتقال من روبوتات المحادثة البسيطة إلى وكلاء الذكاء الاصطناعي القادرين على أتمتة سلاسل المهام المعقدة بدقة متناهية.</p><p>في منصة نيكسوس، رصدنا ارتفاعاً بنسبة 140% في اعتماد الشركات للحلول الذاتية في تحليل البيانات الضخمة وأتمتة العمليات المالية والخدمية.</p><p>الركيزة الأساسية لنجاح هذا التحول تكمن في الحوكمة وحماية خصوصية البيانات المحلية مع دمج نماذج اللغة المخصصة للهجات واللغة العربية.</p>',
@@ -178,6 +185,7 @@ export const mockBlogPosts: BlogPost[] = [
   },
   {
     id: 'post-2',
+    slug: 'افضل-الممارسات-لبناء-انظمة-تصميم-design-systems-متجاوبة-مع-rtl',
     title: 'أفضل الممارسات لبناء أنظمة تصميم (Design Systems) متجاوبة مع RTL',
     excerpt: 'دليل هندسي وتصميمي شامل لتوحيد واجهات المستخدم وتجربة الاستخدام في التطبيقات متعددة اللغات مع التركيز على اللغة العربية.',
     content: '<p>يتطلب تصميم الواجهات الداعمة للغة العربية (RTL) أكثر من مجرد عكس اتجاه النصوص، بل يتطلب فهماً عميقاً للتسلسل البصري وحركة العين في الثقافة العربية.</p><p>في هذا الدليل نستعرض كيفية التعامل مع الأيقونات الاتجاهية، الهوامش الرياضية الدقيقة، واختيار الخطوط التيبوغرافية التي تحافظ على التوازن البصري.</p>',
@@ -207,6 +215,7 @@ export const mockBlogPosts: BlogPost[] = [
   },
   {
     id: 'post-3',
+    slug: 'الامن-السيبراني-السحابي-استراتيجية-zero-trust-لحماية-الاصول-التقنية',
     title: 'الأمن السيبراني السحابي: استراتيجية Zero Trust لحماية الأصول التقنية',
     excerpt: 'خطوات عملية لحماية البنية التحتية السحابية من التهديدات المتقدمة وتطبيق معايير الثقة الصفرية الصارمة.',
     content: '<p>تقوم فلسفة "انعدام الثقة" أو Zero Trust على مبدأ بسيط وحازم: لا تثق بأي مستخدم أو جهاز افتراضياً، وتحقق دائماً وبشكل مستمر.</p><p>تطبيق المصادقة متعددة العوامل بالعتاد وتشفير البيانات المتنقلة والساكنة يمثل خط الدفاع الحاسم لأي مؤسسة حديثة.</p>',
@@ -228,6 +237,7 @@ export const mockBlogPosts: BlogPost[] = [
   },
   {
     id: 'post-4',
+    slug: 'تطوير-تطبيقات-الويب-الفائقة-السرعة-باستخدام-بنية-micro-frontends-الحديثة',
     title: 'تطوير تطبيقات الويب الفائقة السرعة باستخدام بنية Micro-Frontends الحديثة',
     excerpt: 'كيفية تجزئة الأنظمة البرمجية الكبيرة إلى مكونات مستقلة وقابلة للتوسع والنشر اللحظي بدون توقف الخدمات.',
     content: '<p>مع نمو الفرق البرمجية وتوسع الأنظمة، تصبح التطبيقات الأحادية عائقاً أمام سرعة الإطلاق والابتكار.</p><p>تمنح معمارية Micro-Frontends كل فريق حرية اختيار الأدوات والمكتبات المناسبة مع توحيد تجربة المستخدم النهائية.</p>',
@@ -252,6 +262,7 @@ export const mockBlogPosts: BlogPost[] = [
 export const mockJobListings: JobListing[] = [
   {
     id: 'job-1',
+    slug: 'مطور-واجهات-امامية-اول-senior-full-stack-engineer',
     title: 'مطور واجهات أمامية أول (Senior Full-Stack Engineer)',
     department: 'tech',
     departmentLabel: 'التكنولوجيا والبرمجة',
@@ -285,6 +296,7 @@ export const mockJobListings: JobListing[] = [
   },
   {
     id: 'job-2',
+    slug: 'مصمم-تجربة-وواجهات-مستخدم-lead-ui-ux-designer',
     title: 'مصمم تجربة وواجهات مستخدم (Lead UI/UX Designer)',
     department: 'design-creative',
     departmentLabel: 'التصميم والإبداع',
@@ -315,6 +327,7 @@ export const mockJobListings: JobListing[] = [
   },
   {
     id: 'job-3',
+    slug: 'مهندس-ذكاء-اصطناعي-وتعلم-الي-ai-ml-engineer',
     title: 'مهندس ذكاء اصطناعي وتعلم آلي (AI/ML Engineer)',
     department: 'tech',
     departmentLabel: 'التكنولوجيا والبرمجة',
@@ -345,6 +358,7 @@ export const mockJobListings: JobListing[] = [
   },
   {
     id: 'job-4',
+    slug: 'مدير-تسويق-رقمي-ونمو-growth-marketing-lead',
     title: 'مدير تسويق رقمي ونمو (Growth & Marketing Lead)',
     department: 'marketing-sales',
     departmentLabel: 'التسويق والمبيعات',

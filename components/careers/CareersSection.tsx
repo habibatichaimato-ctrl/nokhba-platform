@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Briefcase, 
   Search, 
@@ -44,6 +45,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({
   const [resumeFileName, setResumeFileName] = useState('');
   const [coverLetter, setCoverLetter] = useState('');
   const [applicationSubmittedId, setApplicationSubmittedId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const departments = [
     { id: 'all', label: 'كافة الأقسام' },
@@ -254,7 +256,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({
                   id={`apply-job-btn-${job.id}`}
                   onClick={() => {
                     resetForm();
-                    setActiveJobForModal(job);
+                    navigate(`/careers/${encodeURIComponent(job.slug)}`);
                   }}
                   className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center gap-2"
                 >

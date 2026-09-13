@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   ShoppingBag, 
   Search, 
@@ -52,6 +53,7 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
   const [promoError, setPromoError] = useState<string>('');
   const [promoSuccess, setPromoSuccess] = useState<string>('');
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // Checkout Form State
   const [customerName, setCustomerName] = useState('');
@@ -259,8 +261,7 @@ export const EcommerceSection: React.FC<EcommerceSectionProps> = ({
                 {/* Quick View Button on Image */}
                 <button
                   onClick={() => {
-                    setSelectedProductForModal(product);
-                    setModalQuantity(1);
+                    navigate(`/products/${encodeURIComponent(product.slug)}`);
                   }}
                   className="absolute bottom-3 left-3 bg-slate-900/90 hover:bg-amber-500 hover:text-slate-950 text-white p-2 rounded-xl border border-slate-700 shadow-md transition-colors text-xs font-semibold flex items-center gap-1.5"
                   aria-label="معاينة تفاصيل المنتج"

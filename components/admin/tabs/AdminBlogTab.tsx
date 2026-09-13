@@ -19,8 +19,30 @@ import {
 import { BlogPost } from '../../../types';
 import { normalizeBlogContent } from '../../../types';
 import { supabase } from '../../../lib/supabaseClient';
-import ReactQuill from 'react-quill-new';
+import ReactQuill, { Quill } from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
+
+const Link = Quill.import('formats/link');
+
+class SecureLink extends Link {
+  static create(value: string) {
+    const node = super.create(value) as HTMLAnchorElement;
+    node.setAttribute('target', '_blank');
+    node.setAttribute('rel', 'noopener noreferrer');
+    return node;
+  }
+
+  format(name: string, value: unknown) {
+    super.format(name, value);
+    if (name === 'link' && value) {
+      const node = this.domNode as HTMLAnchorElement;
+      node.setAttribute('target', '_blank');
+      node.setAttribute('rel', 'noopener noreferrer');
+    }
+  }
+}
+
+Quill.register(SecureLink, true);
 
 interface AdminBlogTabProps {
   posts: BlogPost[];
@@ -167,6 +189,7 @@ export const AdminBlogTab: React.FC<AdminBlogTabProps> = ({
 
     const postPayload: BlogPost = {
       id: editingPost ? editingPost.id : `post-${Date.now()}`,
+      slug: editingPost?.slug || '',
       title: formData.title,
       excerpt: formData.excerpt,
       content: formData.content,

@@ -143,6 +143,7 @@ export const AdminCareersTab: React.FC<AdminCareersTabProps> = ({
 
     const jobPayload: JobListing = {
       id: editingJob ? editingJob.id : `job-${Date.now()}`,
+      slug: editingJob?.slug || '',
       title: formData.title,
       department: formData.department,
       departmentLabel: deptLabels[formData.department] || 'عام',

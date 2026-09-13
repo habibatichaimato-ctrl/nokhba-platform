@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { 
   BookOpen, 
   Search, 
@@ -44,6 +46,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
   const [activePostForModal, setActivePostForModal] = useState<BlogPost | null>(null);
   const [bookmarkedPostIds, setBookmarkedPostIds] = useState<Set<string>>(new Set());
   const [copiedLink, setCopiedLink] = useState(false);
+  const navigate = useNavigate();
 
   // Comment input in modal
   const [commentName, setCommentName] = useState('');
@@ -138,8 +141,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
       {featuredPost && selectedCategory === 'all' && !searchQuery && (
         <div
           onClick={() => {
-            setActivePostForModal(featuredPost);
-            onViewPost(featuredPost.id);
+            navigate(`/blog/${encodeURIComponent(featuredPost.slug)}`);
           }}
           className="group relative rounded-3xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 overflow-hidden cursor-pointer shadow-2xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12"
         >
@@ -247,8 +249,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                 key={post.id}
                 id={`blog-card-${post.id}`}
                 onClick={() => {
-                  setActivePostForModal(post);
-                  onViewPost(post.id);
+                  navigate(`/blog/${encodeURIComponent(post.slug)}`);
                 }}
                 className="group rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer"
               >
@@ -417,7 +418,9 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
             {/* Article Content */}
             <div
               className="blog-article-content prose prose-invert max-w-none text-sm sm:text-base text-slate-200 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: normalizeBlogContent(activePostForModal.content) }}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(normalizeBlogContent(activePostForModal.content))
+              }}
             />
 
             {/* Tags cloud */}
