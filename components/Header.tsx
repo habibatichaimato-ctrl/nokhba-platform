@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 w-full bg-slate-900 text-white border-b border-amber-500/30 shadow-md">
       {/* Top micro bar */}
       <div className="bg-slate-950 border-b border-slate-800/60 py-1.5 px-4 text-xs text-slate-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto min-w-0 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Sparkles className="w-3.5 h-3.5" />
@@ -82,17 +82,17 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Main navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
+      <div className="max-w-7xl mx-auto min-w-0 px-3 sm:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Brand Logo */}
           <button
             id="brand-logo-btn"
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-right group focus:outline-none"
+            className="min-w-0 flex-1 flex items-center gap-2 sm:gap-3 text-right group focus:outline-none"
           >
-            <div className="text-2xl sm:text-3xl font-black tracking-tighter text-amber-500 font-['Alexandria'] flex items-center gap-1">
-              <span>NEXUS</span>
-              <span className="text-white text-lg sm:text-xl font-normal">PLATFORM</span>
+            <div className="min-w-0 text-xl sm:text-3xl font-black tracking-tighter text-amber-500 font-['Alexandria'] flex items-center gap-1">
+              <span className="truncate">NEXUS</span>
+              <span className="hidden sm:inline text-white text-lg sm:text-xl font-normal">PLATFORM</span>
             </div>
           </button>
 
@@ -135,13 +135,13 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Action Controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="shrink-0 flex items-center gap-1.5 sm:gap-3">
             <LanguageSwitcher />
             {/* Global Search Pill Button */}
             <button
               id="global-search-trigger"
               onClick={onOpenSearch}
-              className="relative flex items-center gap-2 bg-slate-800/90 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white rounded-full py-1.5 px-4 sm:px-6 text-xs transition-all"
+              className="relative flex shrink-0 items-center gap-2 bg-slate-800/90 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white rounded-full py-1.5 px-2.5 sm:px-6 text-xs transition-all"
               aria-label={t('header.searchAria')}
             >
               <Search className="w-3.5 h-3.5 text-amber-400" />
@@ -195,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-800 bg-slate-950 px-4 pt-4 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden max-w-full overflow-x-hidden border-t border-slate-800 bg-slate-950 px-3 sm:px-4 pt-4 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="grid grid-cols-1 gap-2">
             <button
               onClick={() => handleNavClick('home')}

@@ -1109,7 +1109,7 @@ export default function App() {
 
   // Regular Public Portal Rendering
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-slate-950 font-sans">
+    <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-slate-50 text-slate-800 flex flex-col selection:bg-amber-500 selection:text-slate-950 font-sans">
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 
@@ -1123,7 +1123,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-6">
+      <main className="flex-1 min-w-0 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full py-4 sm:py-6 overflow-x-hidden">
         {isBlogDetail && detailPost && (
           <BlogPostPage post={detailPost} onAddComment={handleAddComment} onToggleLike={handleToggleLike} onViewPost={handleViewPost} />
         )}
